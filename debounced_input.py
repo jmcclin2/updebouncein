@@ -3,7 +3,7 @@ import time
 
 class DebouncedInput:
     """Debounced Raspberry Pico Input Class"""
-    def __init__(self, pin_num, pin_pull, pin_logic_pressed, debounce_ms, callback):
+    def __init__(self, pin_num, callback, pin_pull=None, pin_logic_pressed=True, debounce_ms=100):
         self.pin_num = pin_num
         self.pin_pull = pin_pull
         self.pin_logic_pressed = pin_logic_pressed
