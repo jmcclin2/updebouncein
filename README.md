@@ -1,4 +1,4 @@
-# micropython_debounced_input
+# updebouncein
 Micropython debounced input (momentary button/switch) driver.
 
 * Callback on input press and release
