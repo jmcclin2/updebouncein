@@ -2,7 +2,7 @@ from machine import Pin, Timer
 import time
 
 class DebouncedInput:
-    """Debounced Raspberry Pico Input Class"""
+    """Micropython Debounced GPIO Input Class"""
     def __init__(self, pin_num, callback, pin_pull=None, pin_logic_pressed=True, debounce_ms=100):
         self.pin_num = pin_num
         self.pin_pull = pin_pull
@@ -18,7 +18,7 @@ class DebouncedInput:
         self.db_timer = Timer(-1)
         self.expected_value = True
 
-    def ButtonDebounceTimerExpired(self, timer):
+    def __ButtonDebounceTimerExpired(self, timer):
            
         current_value = False   
            
@@ -46,12 +46,12 @@ class DebouncedInput:
             #print("Missed edge: expected:", self.expected_value, " actual:", current_value)
             
         # Re-enable pin interrupt
-        self.pin.irq(self.ButtonHandler, Pin.IRQ_FALLING | Pin.IRQ_RISING)
+        self.pin.irq(self.__ButtonHandler, Pin.IRQ_FALLING | Pin.IRQ_RISING)
 
-    def ButtonHandler(self, pin):
+    def __ButtonHandler(self, pin):
         
         #print("IRQ with flags:", pin.irq().flags())
-        self.db_timer.init(mode=Timer.ONE_SHOT, period=self.debounce_ms, callback=self.ButtonDebounceTimerExpired)
+        self.db_timer.init(mode=Timer.ONE_SHOT, period=self.debounce_ms, callback=self.__ButtonDebounceTimerExpired)
         
         # Disable pin interrupt
         self.pin.irq(trigger=0)
