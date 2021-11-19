@@ -13,7 +13,7 @@ class DebouncedInput:
         self.last_press_ms = 0
 
         self.pin = Pin(self.pin_num, Pin.IN, self.pin_pull)
-        self.pin.irq(self.ButtonHandler, Pin.IRQ_FALLING | Pin.IRQ_RISING)
+        self.pin.irq(self.__ButtonHandler, Pin.IRQ_FALLING | Pin.IRQ_RISING)
     
         self.db_timer = Timer(-1)
         self.expected_value = True
